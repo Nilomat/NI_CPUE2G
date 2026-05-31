@@ -1,0 +1,40 @@
+instruktions of cpu
+(hex to NISCRIPT)
+
+dec hex
+31  1F  set ar2
+30  1E  set ar1
+29  1D  (ALU Operation) *ALU
+28  1C  set ram
+27  1B  load
+26  1A  get ram
+25  19  set ra
+24  18  output
+23  17  set count
+22  16  output2
+21  15  input
+20  14  set zpe
+19  13  get zpe
+18  12 get count
+17  11 set sr
+16  10 get sr
+15  F  input2
+14  E  input3
+13  D  input4
+12  C  output3
+11  B  output4
+10  A  inc gcx
+9   9  set gcx
+8   8  get gcx
+7   7  inc gcy
+6   6  set gcy
+5   5  get gcy
+4   4
+3   3
+2   2
+1   1
+0   0
+
+*ALU 
+["NAME", hex BYTE]
+["add", 1d], ["sub", 5d], ["and", 7d], ["comp", 3d], ["or", 9d], ["xor", bd], ["ar2_gt_ar1", dd], ["ar1_gt_ar2", fd],

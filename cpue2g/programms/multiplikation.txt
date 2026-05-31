@@ -1,0 +1,11 @@
+load 22
+set ar1
+set ar2
+load 33
+set zpe
+get count
+set gcx
+add
+set ar2
+get gcx
+jumpzp

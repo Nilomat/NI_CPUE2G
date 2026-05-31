@@ -1,0 +1,14 @@
+get count
+set zpe
+load 255
+set ra
+get zpe
+set ram
+noop
+noop
+noop
+noop
+load 255
+set ra
+get ram
+comp

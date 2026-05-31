@@ -1,0 +1,83 @@
+load 255
+set ar1
+load 0
+set gcx
+set gcy
+inc gcy
+load 255
+set ar1
+get gcy
+output2
+set ar2
+load 15
+comp
+jump 5
+inc gcx
+jump 5
+
+
+
+
+
+v2
+load 33
+set ar1
+load 0
+set gcx
+set gcy
+inc gcy
+get gcy
+output2
+set ar2
+load 12
+comp
+jump 5
+inc gcx
+load 0
+set gcy
+jump 5
+
+
+v3
+load 33
+set ar1
+load 0
+set gcx
+set gcy
+inc gcy
+get gcy
+output2
+set ar2
+load 13
+comp
+jump 5
+inc gcx
+load 0
+set gcy
+get gcx
+set ar2
+load 20 
+comp
+jump 5
+load 0
+set gcx
+
+
+v4 with gpu
+load 255
+set ar1
+load 1
+output2
+set gcx
+set gcy
+inc gcy
+inc gcx
+get gcx
+set ar2
+load 14
+comp
+jump 6
+load 0
+output2
+get count
+jumpzp
