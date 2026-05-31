@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NI-Script Tutorial</title>
+    <style>
+        body {
+            background-color: #ffffff; /* white background */
+            color: #000000; /* black text */
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #008000; /* green headings */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 2px solid #008000; /* green table borders */
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #e0ffe0; /* light green header */
+            color: #004d00; /* dark green header text */
+        }
+        td {
+            background-color: #f0fff0; /* light green cells */
+            color: #000000; /* black text */
+        }
+        pre {
+            background-color: #f0fff0; /* light green code background */
+            padding: 10px;
+            overflow-x: auto;
+            color: #006400; /* dark green code text */
+        }
+        hr {
+            border: 2px solid #008000; /* green horizontal line */
+            margin: 20px 0;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        a {
+            color: #008000; /* green links */
+        }
+    </style>
+</head>
+<body>
+    <h1>NI-Script Tutorial</h1>
+
+    <!-- Basics -->
+    <h2>The Basics</h2>
+    <ul>
+        <li><strong>zp</strong> (Zero Page) is the main data register — everything passes through it.</li>
+        <li><strong>ar1</strong> and <strong>ar2</strong> are used for math and comparisons.</li>
+        <li><strong>ram</strong> and <strong>ra</strong> work together for memory storage.</li>
+        <li><strong>zpe</strong> is an extra register often used for loops or temporary storage.</li>
+    </ul>
+
+    <hr>
+    <!-- Data Movement Commands -->
+    <h2>Data Movement Commands</h2>
+    <table>
+        <tr><th>Command</th><th>Meaning</th><th>Explanation</th></tr>
+        <tr><td><strong>load &lt;val&gt;</strong></td><td>Load constant into zp</td><td>Puts a value from data ROM into zp.</td></tr>
+        <tr><td><strong>set ar1</strong></td><td>Move zp to ar1</td><td>Copies zp into ar1.</td></tr>
+        <tr><td><strong>set ar2</strong></td><td>Move zp to ar2</td><td>Copies zp into ar2.</td></tr>
+        <tr><td><strong>set ra</strong></td><td>Set the current RAM address to zp</td><td>Selects memory cell for RAM operations.</td></tr>
+        <tr><td><strong>set ram</strong></td><td>Store zp into current RAM address</td><td>Saves zp into RAM at ra.</td></tr>
+        <tr><td><strong>set zpe</strong></td><td>Set zpe register to zp</td><td>Copies zp into zpe (loop counter, temp storage).</td></tr>
+        <tr><td><strong>get ram</strong></td><td>Load zp from current RAM</td><td>Reads RAM at ra into zp.</td></tr>
+        <tr><td><strong>get zpe</strong></td><td>Load zp from zpe</td><td>Copies zpe into zp.</td></tr>
+        <tr><td><strong>get input</strong></td><td>Read user input into zp</td><td>Main input channel.</td></tr>
+        <tr><td><strong>get count</strong></td><td>Get the program counter</td><td>Reads the current instruction pointer into zp.</td></tr>
+    </table>
+
+    <!-- Arithmetic Commands -->
+    <h2>Arithmetic Commands</h2>
+    <table>
+        <tr><th>Command</th><th>Meaning</th><th>Explanation</th></tr>
+        <tr><td>add</td><td>ar1 + ar2 → zp</td><td>Adds ar1 and ar2, stores in zp.</td></tr>
+        <tr><td>sub</td><td>ar1 - ar2 → zp</td><td>Subtracts ar2 from ar1, result goes into zp.</td></tr>
+    </table>
+
+    <!-- Bitwise Logic Commands -->
+    <h2>Bitwise Logic Commands</h2>
+    <table>
+        <tr><th>Command</th><th>Meaning</th><th>Explanation</th></tr>
+        <tr><td>and</td><td>Bitwise AND</td><td>Logical AND of ar1 and ar2 → zp.</td></tr>
+        <tr><td>or</td><td>Bitwise OR</td><td>Logical OR of ar1 and ar2 → zp.</td></tr>
+        <tr><td>xor</td><td>Bitwise XOR</td><td>Logical XOR of ar1 and ar2 → zp.</td></tr>
+    </table>
+
+    <!-- Comparison Commands -->
+    <h2>Comparison and Control Flow</h2>
+    <table>
+        <tr><th>Command</th><th>Meaning</th><th>Explanation</th></tr>
+        <tr><td>comp</td><td>Jump if ar1 == ar2</td><td>Compares ar1 and ar2; jumps to zp if equal.</td></tr>
+        <tr><td>ar2_gt_ar1</td><td>Jump if ar2 > ar1</td><td>Jump to zp if ar2 > ar1.</td></tr>
+        <tr><td>ar1_gt_ar2</td><td>Jump if ar1 > ar2</td><td>Jump to zp if ar1 > ar2.</td></tr>
+    </table>
+
+    <!-- Jump Commands -->
+    <h2>Jump Commands</h2>
+    <table>
+        <tr><th>Command</th><th>Meaning</th><th>Explanation</th></tr>
+        <tr><td>jump &lt;addr&gt;</td><td>Jump to address</td><td>Moves execution to specified address; counts as 2 instructions.</td></tr>
+        <tr><td>jumpzp</td><td>Jump to zp</td><td>Jump to address stored in zp (dynamic jump).</td></tr>
+    </table>
+
+    <!-- Output Commands -->
+    <h2>Output Commands</h2>
+    <table>
+        <tr><th>Command</th><th>Meaning</th><th>Explanation</th></tr>
+        <tr><td>output</td><td>Print zp</td><td>Outputs zp to main output.</td></tr>
+        <tr><td>output2</td><td>Print zp to secondary output</td><td>Outputs zp to a second channel.</td></tr>
+        <tr><td>output3</td><td>Print zp to third output</td><td>Outputs zp to a third channel.</td></tr>
+        <tr><td>output4</td><td>Print zp to fourth output</td><td>Outputs zp to a fourth channel.</td></tr>
+    </table>
+
+    <!-- Extra Instruction Details -->
+    <hr>
+    <h2>Extra Instruction Details</h2>
+    <p><strong>SR (Sector Register)</strong>: selects active Program or Data ROM sector. Each sector holds 255 instructions. When a sector ends, the CPU automatically jumps to the next sector. Use <code>set sr</code> to select a sector and <code>get sr</code> to read it.</p>
+
+    <p><strong>Program Counter:</strong> <code>get count</code> reads the current instruction pointer into <code>zp</code>.</p>
+
+    <p><strong>Extra Inputs:</strong> <code>get input2</code>, <code>get input3</code>, <code>get input4</code> read additional inputs independently into <code>zp</code>.</p>
+
+    <p><strong>Extra Outputs:</strong> <code>output2</code>, <code>output3</code>, <code>output4</code> write <code>zp</code> values to multiple output channels.</p>
+
+    <p><strong>Jump Instructions:</strong> <code>jump &lt;addr&gt;</code> counts as 2 instructions. <code>jumpzp</code> jumps to the address stored in <code>zp</code>.</p>
+
+    <!-- Summary Table -->
+    <hr>
+    <h2>Summary Table of Commands</h2>
+    <table>
+        <tr><th>Command</th><th>Description</th><th>External Data Needed?</th></tr>
+        <tr><td>load &lt;val&gt;</td><td>Load constant into zp</td><td>Yes (from data ROM)</td></tr>
+        <tr><td>set ar1</td><td>Move zp to ar1</td><td>No</td></tr>
+        <tr><td>set ar2</td><td>Move zp to ar2</td><td>No</td></tr>
+        <tr><td>set ra</td><td>Set RAM address</td><td>No</td></tr>
+        <tr><td>set ram</td><td>Set current RAM to zp</td><td>No</td></tr>
+        <tr><td>set zpe</td><td>Set zpe to zp</td><td>No</td></tr>
+        <tr><td>get ram</td><td>Set zp to RAM</td><td>No</td></tr>
+        <tr><td>get zpe</td><td>Set zp to zpe</td><td>No</td></tr>
+        <tr><td>get input</td><td>Set zp to user input</td><td>No</td></tr>
+        <tr><td>get input2</td><td>Set zp to user input 2</td><td>No</td></tr>
+        <tr><td>get input3</td><td>Set zp to user input 3</td><td>No</td></tr>
+        <tr><td>get input4</td><td>Set zp to user input 4</td><td>No</td></tr>
+        <tr><td>get count</td><td>Get the current address (program counter)</td><td>No</td></tr>
+        <tr><td>get sr</td><td>Get active ROM sector</td><td>No</td></tr>
+        <tr><td>set sr</td><td>Set active ROM sector</td><td>No</td></tr>
+        <tr><td>add</td><td>Add ar1 + ar2 → zp</td><td>No</td></tr>
+        <tr><td>sub</td><td>Subtract ar1 - ar2 → zp</td><td>No</td></tr>
+        <tr><td>and</td><td>Bitwise AND</td><td>No</td></tr>
+        <tr><td>or</td><td>Bitwise OR</td><td>No</td></tr>
+        <tr><td>xor</td><td>Bitwise XOR</td><td>No</td></tr>
+        <tr><td>comp</td><td>Jump if ar1 == ar2</td><td>No</td></tr>
+        <tr><td>ar2_gt_ar1</td><td>Compare ar2 > ar1</td><td>No</td></tr>
+        <tr><td>ar1_gt_ar2</td><td>Compare ar1 > ar2</td><td>No</td></tr>
+        <tr><td>output</td><td>Output zp</td><td>No</td></tr>
+        <tr><td>output2</td><td>Output2 zp</td><td>No</td></tr>
+        <tr><td>output3</td><td>Output3 zp</td><td>No</td></tr>
+        <tr><td>output4</td><td>Output4 zp</td><td>No</td></tr>
+        <tr><td>jump &lt;addr&gt;</td><td>Jump to address</td><td>Yes (address), counts as 2 instructions</td></tr>
+        <tr><td>jumpzp</td><td>Jump to value stored in zp</td><td>No</td></tr>
+    </table>
+
+    <!-- Simple Tutorial -->
+    <hr>
+    <h2>Simple NI-Script Tutorial</h2>
+    <p>This example demonstrates a basic program flow:</p>
+    <pre><code>; Step 1: Select data ROM sector
+load 0
+set sr
+
+; Step 2: Load values into registers
+load 10
+set ar1
+load 5
+set ar2
+
+; Step 3: Perform arithmetic
+add
+
+; Step 4: Output the result
+output
+</code></pre>
+    <p><strong>Explanation:</strong></p>
+    <ul>
+        <li><code>load &lt;val&gt;</code>: Reads value from data ROM into <code>zp</code>.</li>
+        <li><code>set ar1</code>, <code>set ar2</code>: Store values in registers for arithmetic.</li>
+        <li><code>add</code>: Adds <code>ar1</code> + <code>ar2</code>, result goes into <code>zp</code>.</li>
+        <li><code>output</code>: Prints the result stored in <code>zp</code>.</li>
+    </ul>
+
+</body>
+</html>
